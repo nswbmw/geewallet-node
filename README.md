@@ -14,6 +14,7 @@ $ npm i geewallet --save
 import GeeWallet from 'geewallet'
 
 const geewalletClient = new GeeWallet({
+  mchUserId: '7652222',
   mchNo: 'M1644203246',
   appId: '62e49a0dec2e3a4f360e59d5',
   geewalletPublicKey: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAin6L7sbSapqKlDKzJkm9ztT98sH6sn/IggTr0AUN2jJIPZg6Xzi/t2rV/Bq8e8/xHE7IqkRZmLsIs8a4b+cel/NzcltKs/H9fWEq3o13MVA/ARokP5bqgIoFdHlnI8PRu+v8XdCZVKTxtgu4KIQV6HYyB6UhND4NyhqwsDC101MAuskxLVBMZfG9Og9RC3SysXCCzJrhsQNVUrdZ6boXf+2CyiACL/P+LADx8rs63uyAON2t6hjMfwgIMo2RWuP9rMPUP250UzWd/4gIrwpco4WdMeSbLqltHR3qUu6TPazVA5xgYz3Y7q84ffCBvXarVJmy2pwxd9VCohN8ayWgeQIDAQAB',

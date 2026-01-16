@@ -9,6 +9,7 @@ export type ProxyOptions =
     }
 
 export interface GeeWalletInitOptions {
+  mchUserId: string
   mchNo: string
   appId: string
   geewalletPublicKey: string

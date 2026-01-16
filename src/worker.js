@@ -2,12 +2,16 @@ import sortKeys from 'sort-keys'
 
 class GeeWallet {
   constructor (options = {}) {
+    this.mchUserId = options.mchUserId
     this.mchNo = options.mchNo
     this.appId = options.appId
     this.geewalletPublicKey = options.geewalletPublicKey
     this.secretKey = options.secretKey
     this.apiHost = options.apiHost || 'https://easypayer.io/payment-ci/api/'
 
+    if (!this.mchUserId) {
+      throw new TypeError('No mchUserId')
+    }
     if (!this.mchNo) {
       throw new TypeError('No mchNo')
     }
@@ -91,6 +95,7 @@ class GeeWallet {
     }
 
     if (body) {
+      body.mchUserId = this.mchUserId
       body.mchNo = this.mchNo
       body.appId = this.appId
       body.signType = body.signType || 'RSA'
@@ -104,7 +109,14 @@ class GeeWallet {
     }
 
     const response = await fetch(this._getURL(url), fetchOptions)
-    return response.json()
+    const data = await response.json()
+
+    const passed = await this.verifyRSASign(data.data, data.sign)
+    if (!passed) {
+      throw new Error(`Failed to verify response sign: ${JSON.stringify(data, null, 2)}`)
+    }
+
+    return data
   }
 }
 
