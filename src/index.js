@@ -129,8 +129,14 @@ class GeeWallet {
     }
 
     const response = await request(payload)
+    const data = response.data
 
-    return response.data
+    const passed = await this.verifyRSASign(data.data, data.sign)
+    if (!passed) {
+      throw new Error(`Failed to verify response sign: ${JSON.stringify(data, null, 2)}`)
+    }
+
+    return data
   }
 }
 
